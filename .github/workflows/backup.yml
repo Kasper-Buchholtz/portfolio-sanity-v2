@@ -1,0 +1,47 @@
+name: Backup Sanity
+
+on:
+  schedule:
+    - cron: '0 03 */1 * *'
+  workflow_dispatch:
+
+jobs:
+  sanity-backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Packages
+        run: npm install
+
+      - name: Install Sanity CLI
+        run: npm install -g @sanity/cli
+
+      # Create a backups directory at the repository root
+      - name: Create backups directory
+        run: mkdir -p backups
+
+      - name: Export Sanity dataset
+        run: |
+          if [ -d "apps/web" ]; then
+            echo "Found apps/web. Using it."
+            cd apps/web
+            # Go up two levels to reach the repository root's backups folder.
+            sanity dataset export production ../../backups/backup-web.tar.gz
+          elif [ -d "apps/i18n" ]; then
+            echo "Found apps/i18n. Using it."
+            cd apps/i18n
+            sanity dataset export production ../../backups/backup-i18n.tar.gz
+          else
+            echo "No Sanity folder found. Exiting."
+            exit 1
+          fi
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+
+      - name: Upload Backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: sanity-backup
+          path: backups/*.tar.gz

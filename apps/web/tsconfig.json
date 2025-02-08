@@ -1,0 +1,32 @@
+{
+  "extends": "@repo/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "target": "es2017",
+    "plugins": [{ "name": "next" }],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "allowJs": true,
+  "skipLibCheck": true,
+  "strict": false,
+  "forceConsistentCasingInFileNames": true,
+  "noEmit": true,
+  "incremental": true,
+  "esModuleInterop": true,
+  "module": "esnext",
+  "moduleResolution": "node",
+  "resolveJsonModule": true,
+  "isolatedModules": true,
+  "jsx": "preserve",
+  "noImplicitAny": false,
+  "strictNullChecks": false,
+  "strictFunctionTypes": false,
+  "strictBindCallApply": false,
+  "strictPropertyInitialization": false,
+  "noImplicitThis": false,
+  "alwaysStrict": false,
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.ts", "src/components/molecules/Seo.jsx", "sanity.cli.js"],
+  "exclude": ["node_modules"]
+}
