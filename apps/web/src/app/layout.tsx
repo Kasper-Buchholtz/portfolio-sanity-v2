@@ -25,7 +25,7 @@ export default async function Root({ children }: { children: React.ReactNode }) 
   return (
     <html lang="da-DK" className={`${sans.variable} ${serif.variable}`}>
       <body
-        className={`selection:text-superego-light-light selection:bg-superego-green ${isDraftModeEnabled ? 'debug-screens' : ''}`}
+        className="p-3 bg-background-default"
       >
         {children}
       </body>

@@ -7,6 +7,8 @@ import Section from '@/components/sections/Section'
 import Modal from '../molecules/Modal'
 import { useState } from 'react'
 import { AnimatePresence } from 'motion/react'
+import { Button } from '../atoms/Button'
+import { AdvancedButton } from '../atoms/AdvancedButton'
 
 /**
  *
@@ -24,51 +26,71 @@ interface HeroProps {
   data?: any
 }
 
-const before =
-  'before:bg-gradient-to-b before:from-dark/0 before:to-dark/60 before:absolute before:inset-0 before:z-10 '
-  
-const Hero: React.FC<HeroProps> = ({ data, ...props }) => {
-  const [isOpen, setIsOpen] = useState(false)
 
-  const OpenModal = () => {
-    setIsOpen(!isOpen)
-  }
+const Hero: React.FC<HeroProps> = ({ data, ...props }) => {
+  const isQuicklinks = data?.quickLinks?.length > 0
   return (
     <>
       <Section
-        {...props}
+        data-isquicklinks={isQuicklinks}
+        className='group/isQuicklinks'
         data={data}
-        paddingX="none"
-        className={`h-screen relative place-content-center overflow-hidden ${before}`}
+        variant='transparent'
+
+        paddingTop='none'
+        paddingBottom='none'
+        paddingX='none'
       >
-        <div className="absolute w-full h-full">
-          <Media data={data?.MediaObject?.media} />
-        </div>
-        <div className="z-10 col-start-1 text-center -col-end-1 sm:col-start-2 sm:-col-end-2 lg:col-start-3 lg:-col-end-3 xl:col-start-6 xl:-col-end-6 2xl:col-start-6 2xl:-col-end-6">
-          <Heading tag="h1" type="h1" fontFamily="sans">
-            {data?.title}
-          </Heading>
+        <div className=' rounded py-8 md:py-12  px-6 md:px-12 space-y-20 md:space-y-32 col-span-full bg-background-muted group-data-[isquicklinks=true]/isQuicklinks:col-span-4'>
+          <Heading tag='h1' type='h1'>{data?.title}</Heading>
           <Paragraph>{data?.subtitle}</Paragraph>
-          {data?.MediaObject?.media.videoObject && (
-            <button onClick={OpenModal} className="relative z-40 text-white">
-              Afspil video
-            </button>
-          )}
-          <div className="absolute top-0 left-0 z-50 flex items-center justify-center w-full h-full pointer-events-none">
-            {data?.MediaObject?.media?.videoObject?.video && (
-              <AnimatePresence mode="sync">
-                {isOpen && (
-                  <Modal openModal={OpenModal}>
-                    <Media data={data?.MediaObject?.media} />
-                  </Modal>
-                )}
-              </AnimatePresence>
-            )}
-          </div>
         </div>
+        {isQuicklinks &&(
+          <QuickLinks data={data?.quickLinks} />
+        )}
       </Section>
     </>
   )
 }
 
 export default Hero
+
+
+
+function QuickLinks({ data }) {
+  return (
+    <div className='col-span-2 '>
+      <ul className='grid h-full gap-3'>
+        {data?.map((item, index) => {
+          return (
+            <li key={index}>
+              <Button variant='muted' className='justify-between w-full h-full' link={item.link}  />
+            </li>
+          )
+        }
+        )}
+      </ul>
+    </div>
+  )
+}
+
+/* 
+
+
+group-data-[open=true]/root:text-rød
+8:56
+<button
+      onClick={toggle}
+      aria-expanded={isOpen}
+      data-open={isOpen}
+    >
+
+
+
+
+
+
+
+
+
+*/

@@ -19,4 +19,5 @@ export type PageBuilderProps = {
   sections: Section[]
   documentId: string
   documentType: string
+  className?: string
 }

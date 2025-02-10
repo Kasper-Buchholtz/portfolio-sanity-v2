@@ -6,6 +6,7 @@ import Navigation from '@/components/organisms/Navigation'
 import Logo from '../atoms/Logo'
 import Section from '../sections/Section'
 import NavigationGroup from './NavigationGroup'
+import ThemeToggler from '../atoms/themeToggler'
 
 /**
  *
@@ -57,20 +58,23 @@ export default function Header() {
   return (
     <>
       <Section
-        paddingBottom={'none'} paddingTop={'none'} tag={'header'}
-        className={` fixed top-0 right-0 w-full py-4 se-grid  z-[9999999999] h-20 transition-all ${isScrolled ? '!bg-superego-light-light' : 'bg-transparent'
+        paddingBottom={'none'} paddingTop={'none'} tag={'header'} gap='secondary' columns='secondary'
+        className={` flex justify-between fixed top-0 right-0 dark:bg-red-500 w-full py-4 se-grid  z-[9999999999] h-20 transition-all ${isScrolled ? '!bg-superego-light-light' : 'bg-transparent'
           }`}
       >
         <Link className='col-span-2 col-start-1 md:col-span-5 xl:col-span-6' href='/' title=''>
-          <Logo className="w-full h-auto max-w-xs" variant='mørk' />
+          <Logo className="px-2 py-1.5 w-full h-auto max-w-xs " variant='lys' />
         </Link>
         <NavigationGroup
           isOpen={isOpen}
           setIsOpen={setIsOpen}
         />
+        <Navigation  />
+        <ThemeToggler />
+
       </Section>
       <AnimatePresence mode="wait">
-        {isOpen && <Navigation onClose={handleCloseNav} />}
+        {isOpen && <Navigation isMobile onClose={handleCloseNav} />}
       </AnimatePresence>
     </>
   )

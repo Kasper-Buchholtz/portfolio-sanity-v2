@@ -40,25 +40,9 @@ export default function NavigationItem({ item }: NavigationItemProps) {
   };
   return (
     <li>
-      <Button onClick={toggleSubmenu} link={item.link as any} variant="none" className="w-full block relative pr-8">
+      <Button onClick={toggleSubmenu} link={item.link as any} variant="none" className="hover:bg-background-muted px-2 py-1.5">
         {item?.link?.label}
-        {item.links && item.links.length > 0 && (<Icon type="chevronDown" className={`size-3 fill-current absolute transition right-0 top-1/2 -translate-y-1/2 ${isSubmenuOpen ? 'transform rotate-180' : ''}`} />)}
       </Button>
-      <AnimatePresence>
-        {item.links && item.links.length > 0 && isSubmenuOpen && (
-          <motion.ul
-            initial={{ height: 0 }}
-            animate={{ height: 'auto' }}
-            exit={{ height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="pl-4 mt-2 space-y-2 overflow-hidden"
-          >
-            {item.links.map((subItem, index) => (
-              <NavigationItem key={index} item={subItem as any} />
-            ))}
-          </motion.ul>
-        )}
-      </AnimatePresence>
     </li>
   );
 }

@@ -2,6 +2,8 @@
 import Footer from '@/components/organisms/Footer'
 import Header from '@/components/organisms/Header'
 import { Lenis } from '@/components/Lenis'
+import { cva, VariantProps } from 'class-variance-authority'
+import { cn } from '@/utils/twMerge'
 
 /**
  *
@@ -15,22 +17,21 @@ import { Lenis } from '@/components/Lenis'
  *
  **/
 
-
-export default function PageContainer({
-  lenis = {
-    lerp: 0.1,
-    duration: 1.2,
-    smoothTouch: false, //smooth scroll for touch devices
-    smooth: true,
-    easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)), 
-    orientation: "vertical",
-    gestureOrientation: "vertical",
-    smoothWheel: true,
-    touchMultiplier: 2,
-
+const PageContainerVariant = cva('', {
+  variants: {
+    grid: {
+      2: 'grid-cols-2 grid gap-3',
+      increased: 'grid-cols-3 grid gap-3',
+      none: 'none',
+    },
   },
-  children,
-}: {
+  defaultVariants: {
+    grid: 2,
+  },
+})
+
+
+type PagecontainerProps = {
   lenis?: {
     lerp: number,
     duration: number,
@@ -43,16 +44,37 @@ export default function PageContainer({
     touchMultiplier: number,
   },
   children: React.ReactNode,
+  className?: string
+}
 
-}) {
+
+type ExtendedPagecontainerProps = PagecontainerProps & VariantProps<typeof PageContainerVariant>
+
+
+
+export default function PageContainer({
+  lenis = {
+    lerp: 0.1,
+    duration: 1.2,
+    smoothTouch: false, //smooth scroll for touch devices
+    smooth: true,
+    easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
+    orientation: "vertical",
+    gestureOrientation: "vertical",
+    smoothWheel: true,
+    touchMultiplier: 2,
+  },
+  children,
+  grid,
+  className
+}: ExtendedPagecontainerProps) {
   return (
     <>
       <Header />
       <Lenis options={lenis} root={typeof document !== 'undefined' ? document.documentElement : null} />
-      <main className={` min-h-screen bg-superego-light-light`}>
+      <main className={`min-h-screen bg-background-default ${cn(PageContainerVariant({ grid, className }))}`}>
         {children}
       </main>
-      <Footer />
     </>
   )
 }

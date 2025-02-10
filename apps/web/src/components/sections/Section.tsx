@@ -18,13 +18,16 @@ import { clean } from '@/utils/sanitize'
 const sectionVariants = cva('grid', {
   variants: {
     variant: {
-      lys: 'bg-superego-light-light text-superego-dark',
+      lys: 'bg-background-default text-text-default',
       mørk: 'bg-superego-dark text-superego-light-base',
       lilla: 'bg-superego-purple text-superego-light-base',
+      transparent: '',
+
+      muted: 'bg-background-muted text-text-default rounded border border-border-default',
     },
     columns: {
       default:
-        'grid-cols-4 xs:grid-cols-4 sm:grid-cols-8 md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-24 2xl:grid-cols-24',
+        'grid-cols-4 xs:grid-cols-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6',
       secondary: '',
     },
     gap: {
@@ -32,17 +35,17 @@ const sectionVariants = cva('grid', {
       secondary: '',
     },
     paddingX: {
-      default: 'px-4 xs:px-4 sm:px-13 md:px-24 lg:px-19 xl:px-36 2xl:px-52',
+      default: 'px-6 md:px-12',
       none: '',
-      right: 'pr-4 xs:pr-4 sm:pr-13 md:pr-24 lg:pr-19 xl:pr-36 2xl:pr-52',
-      left: 'pl-4 xs:pl-4 sm:pl-13 md:pl-24 lg:pl-19 xl:pl-36 2xl:pl-52',
+      right: 'pr-6 md:pr-12',
+      left: 'pl-6 md:pl-12',
     },
     paddingTop: {
-      default: 'pt-16 sm:pt-20 md:pt-24 lg:pt-32 xl:pt-40 2xl:pt-48',
+      default: 'pt-8 md:pt-12',
       none: '',
     },
     paddingBottom: {
-      default: 'pb-16 sm:pb-20 md:pb-24 lg:pb-32 xl:pb-40 2xl:pb-48',
+      default: 'pb-8 md:pb-12',
       none: '',
     },
   },

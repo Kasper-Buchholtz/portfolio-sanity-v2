@@ -1,4 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "./base/breakpoint-variables.css";
+@import "./base/color-variables.css";
+@import "./base/text-variables.css";
+@import "./base/spacing-variables.css";
+@import "./base/ease-variables.css";
 
+/* @plugin */
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/aspect-ratio";
+
+
+@theme {}

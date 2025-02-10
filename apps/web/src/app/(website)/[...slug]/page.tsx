@@ -6,6 +6,7 @@ import PageContainer from '@/components/PageContainer'
 import { notFound } from 'next/navigation'
 import { generatePageMetadata } from '@/utils/metadataUtils'
 import { Params } from '../artikler/[...slug]/page'
+import Photo from '@/components/atoms/Photo'
 
 export interface PageParams {
   params: Promise<Params>
@@ -24,6 +25,7 @@ export default async function DynamicRoute({
 
   return (
     <PageContainer>
+      <Photo image={page.image} className='sticky h-[calc(100vh-24px)] rounded top-3' />
       {page.pageBuilder &&
         <PageBuilder
           documentId={page._id}

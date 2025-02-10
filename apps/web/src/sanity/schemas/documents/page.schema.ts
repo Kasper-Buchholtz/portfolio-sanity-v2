@@ -46,7 +46,7 @@ export default defineType({
       },
     }), */
     defineField({
-      name: 'mainImage',
+      name: 'image',
       title: 'Udvalgt billede',
       type: 'image',
     }),

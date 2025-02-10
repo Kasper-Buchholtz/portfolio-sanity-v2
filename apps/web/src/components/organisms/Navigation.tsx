@@ -16,11 +16,17 @@ import NavigationItem from '../atoms/NavigationItem'
  *
  **/
 
+type NavigationProps = {
+  onClose?: () => void
+  isMobile?: boolean
+}
 
-export default function Navigation({ onClose }) {
+export default function Navigation({ onClose, isMobile }: NavigationProps) {
   const data = useNavigationData();
 
   return (
+    <>
+    {isMobile ? (
     <>
       <motion.nav
         role="navigation"
@@ -32,7 +38,7 @@ export default function Navigation({ onClose }) {
         className="fixed z-[999] top-0 right-0 w-screen h-screen sm:w-[50vw] md:w-[50vw] lg:w-[33vw] overflow-auto bg-superego-light-light"
       >
         <ul className="h-full px-6 pb-6 space-y-6 overflow-auto md:px-24 lg:px-19 xl:px-16 sm:px-13 pt-44 sm:pt-32 md:pt-28 lg:pt-28 text-medium">
-          {data?.links?.map((item, index) => (
+          {data?.links?.map((item: any, index: number) => (
             <NavigationItem key={index} item={item} />
           ))}
         </ul>
@@ -46,6 +52,16 @@ export default function Navigation({ onClose }) {
         transition={{ duration: 0.5, stiffness: 100 }}
         onClick={onClose}
       />
+      </>
+    ) : (
+      <nav className="justify-end hidden col-start-4 gap-6 md:flex md:col-start-6 xl:col-start-8 -col-end-1">
+        <ul className="flex gap-1 text-[14px] bg-background-default my-auto px-1.5 py-0.5 rounded shadow">
+          {data?.links?.map((item: any, index: number) => (
+            <NavigationItem key={index} item={item} />
+          ))}
+        </ul>
+      </nav>
+    )}
     </>
   );
 }

@@ -14,13 +14,13 @@ const config: Omit<Config, 'content'> = {
       '3xl': '2500px', // desktop     // 24 Column   // 206px margin   // 2500px 3xl:
     },
     fontSize: {
-      small: 'clamp(12px, calc(16px + 1.6667vw), 14px);',
-      regular: 'clamp(1em, 1.2rem + 0.667rem, 1.05rem);',
-      increased: 'clamp(1.1rem, calc(1.1rem + 1.6667vw), 1.2rem);',
-      medium: 'clamp(1.25rem, calc(1.25rem + 2.7778vw), 1.5rem);',
-      large: 'clamp(1.563rem, calc(1.563rem + 3.125vw), 2.25rem);',
-      huge: 'clamp(1.953rem, calc(1.953rem + 2.6667vw), 3.375rem);',
-      giant: 'clamp(2.441rem, calc(2.441rem + 2.1111vw), 5.063rem);',
+      small: '1rem', // clamp(12px, calc(16px + 1.6667vw), 14px);
+      regular: '1rem',
+      increased: '1.125rem', // clamp(1.1rem, calc(1.1rem + 1.6667vw), 1.2rem);
+      medium: '1.5rem', // clamp(1.25rem, calc(1.25rem + 2.7778vw), 1.5rem);
+      large: '1.75rem', // clamp(1.563rem, calc(1.563rem + 3.125vw), 2.25rem);
+      huge: '2rem', // clamp(1.953rem, calc(1.953rem + 2.6667vw), 3.375rem);
+      giant: '2.5rem', // clamp(2.441rem, calc(2.441rem + 2.1111vw), 5.063rem)
     },
     fontFamily: {
       sans: ['var(--font-sans)'],
@@ -28,6 +28,29 @@ const config: Omit<Config, 'content'> = {
     },
     extend: {
       colors: {
+          text: {
+            "default": 'oklch(18.67% 0.0000 0.00)',
+            "muted": "#oklch(17.10% 0.0047 224.33)",
+            "inverse": "oklch(100.00% 0.0000 0.00)",
+            "inverse-muted": "#FFFFFF99",
+            "muted-2": '#CBC8C5'
+          },
+          background: {
+            'default': 'oklch(93.40% 0.0000 0.00)',
+            'muted': 'oklch(91.05% 0.0046 78.30)',
+            'primary': 'oklch(18.67% 0.0000 0.00)',
+            'inverse-muted': 'oklch(29.31% 0.0000 0.00)',
+            'default-2': 'oklch(93.40% 0.0000 0.00)',
+          },
+          border: {
+            'default': 'oklch(83.43% 0.0053 67.75)',
+            'inverse': 'oklch(100.00% 0.0000 89.88)'
+          },  
+          icons: {
+            'default': 'oklch(17.12% 0.0039 229.06)',
+            'inverse': 'oklch(100.00% 0.0000 0.00)'
+          },
+  
         superego: {
           green: '#3BE086',
           purple: '#7B61FF',

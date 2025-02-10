@@ -26,9 +26,11 @@ const advancedButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-superego-green px-4 py-2 text-superego-light-light hover:bg-superego-green/90',  // @deprecated
-        primary: 'bg-superego-green px-4 py-2 text-superego-light-light hover:bg-superego-green/90',
-        secondary:'bg-superego-dark px-4 py-2 text-superego-light-light hover:bg-superego-dark/80',
+        default: 'px-3.5 py-3 bg-background-default text-text-default', 
+        muted: 'px-3.5 py-3 bg-[#E3E1DE] text-text-default',
+        muted2:'bg-[#CBC8C5] px-3.5 py-3 text-text-default',
+        primary: 'px-3.5 py-3 bg-background-primary text-text-inverse',
+        primaryMuted: 'px-3.5 py-3 bg-background-inverse-muted text-text-inverse',
         none: ''
       },
     },

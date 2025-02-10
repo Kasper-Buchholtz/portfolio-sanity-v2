@@ -1,5 +1,5 @@
 import { PanelTopInactive } from '@mynaui/icons-react'
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 export const heroType = defineType({
   name: 'hero',
   type: 'object',
@@ -23,14 +23,23 @@ export const heroType = defineType({
     defineField({
       group: 'content',
       name: 'subtitle',
-      type: 'string',
+      type: 'text',
     }),
-    {
-      group: 'media',
-      name: 'MediaObject',
-      title: 'Medie',
-      type: 'MediaObject',
-    },
+    defineField({
+      name: 'quickLinks',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'link',
+              type: 'link',
+            }),
+          ]
+        })
+      ],
+    }),
     {
       group: 'settings',
       name: 'SectionSettings',

@@ -20,7 +20,7 @@ type NavigationGroupProps = {
 
 const NavigationGroup = ({  isOpen, setIsOpen }: NavigationGroupProps) => {
     return (
-        <div className='flex col-start-4 md:col-start-6 xl:col-start-8 gap-6 justify-end -col-end-1'>
+        <div className='flex justify-end col-start-4 gap-6 md:hidden md:col-start-6 xl:col-start-8 -col-end-1'>
             <Search />
             <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>

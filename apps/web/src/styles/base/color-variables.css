@@ -1,0 +1,18 @@
+/* colors */
+@theme {
+  --color-superego-green: oklch(80.31% 0.1841 154.09);
+  --color-superego-purple: oklch(60.57% 0.224 285.06);
+  --color-superego-lavendar: oklch(78.53% 0.0966 306.74);
+  --color-superego-flamingo: oklch(85.5% 0.0807 323.55);
+  --color-superego-grey: oklch(54.13% 0.0304 238.04);
+  --color-superego-light-base: oklch(99.11% 0 0);
+  --color-superego-light-light: oklch(95.69% 0.0025 228.78);
+  --color-superego-light-0: oklch(100% 0 0);
+  --color-superego-light-50: oklch(95.51% 0 0);
+  --color-superego-light-100: oklch(90.67% 0 0);
+  --color-superego-light-200: oklch(81.41% 0 0);
+  --color-superego-light-300: oklch(71.55% 0 0);
+  --color-superego-light-400: oklch(61.67% 0 0);
+  --color-superego-dark: oklch(28.48% 0.0148 244.18);
+  --color-superego-black: oklch(36% 0 0);
+}

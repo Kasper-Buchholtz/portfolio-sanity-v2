@@ -19,12 +19,10 @@ import InnerBlocks from "../molecules/InnerBlocks";
 const TextContainer: React.FC<TextContainerProps> = ({ data, asChild = false, children, paddingX, paddingTop, paddingBottom }) => {
   return (
     <Section
-      paddingX={paddingX}
-      paddingTop={paddingTop}
-      paddingBottom={paddingBottom}
+    variant="muted"
       data={data}
     >
-      <div className="col-start-1 -col-end-1 sm:col-start-2 sm:-col-end-2 lg:col-start-3 lg:-col-end-3 xl:col-start-6 xl:-col-end-6 2xl:col-start-6 2xl:-col-end-6">
+      <div className="col-span-full">
         {asChild ? (
           <div>
             {children}

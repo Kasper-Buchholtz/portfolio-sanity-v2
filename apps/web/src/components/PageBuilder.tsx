@@ -1,34 +1,40 @@
 "use client"
+
 import React from 'react'
-import ArticlesSection from '@/components/sections/ArticlesSection'
-import CallToActionSection from '@/components/sections/CallToActionSection'
-import CallToActionSection2 from './sections/CallToActionSection2'
-import EventSection from '@/components/sections/EventSection'
-import GallerySection from '@/components/sections/GallerySection'
-import Hero from '@/components/sections/HeroSection'
-import Media from '@/components/sections/MediaSection'
-import TextWithIllustration from '@/components/sections/TextWithIllustration'
-import EmployeesSection from './sections/EmployeesSection'
-import Breadcrumbs from './molecules/Breadcrumbs'
-import TextContainer from './sections/textContainer'
-import Hero2 from './sections/Hero2Section'
-import Hero3 from './sections/Hero3Section'
-import LogoGallery from './sections/LogoGallery'
-import LogoGallery2 from './sections/LogoGallery2'
-import ContactFormSection from './sections/ContactFormSection'
 import { createDataAttribute, useOptimistic } from '@sanity/visual-editing'
 import { PageBuilderProps, PageData, Section } from '@/types/PageBuilder.types'
+import { renderSection } from './sections';
+import { randomKey } from '@/utils/randomKey';
+import { cva, VariantProps } from 'class-variance-authority';
+import { cn } from '@/utils/twMerge';
 
 const sanityConfig = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || '',
 };
 
+
+const PageBuilderVariant = cva('', {
+  variants: {
+    gridPlacement: {
+      2: 'col-start-2 col-end-2',
+      increased: 'grid-cols-3 grid gap-3',
+      none: 'none',
+    },
+  },
+  defaultVariants: {
+    gridPlacement: 2,
+  },
+})
+type ExtendedPageBuilderProps = PageBuilderProps & VariantProps<typeof PageBuilderVariant>
+
 export function PageBuilder({
   sections: initialSections,
   documentId,
   documentType,
-}: PageBuilderProps) {
+  gridPlacement,
+  className=""
+}: ExtendedPageBuilderProps) {
   const sections = useOptimistic<Section[], PageData>(
     initialSections,
     (currentSections, action) => {
@@ -44,12 +50,11 @@ export function PageBuilder({
     }
   );
 
-  function randomKey() {
-    return Math.random().toString(36).substring(7)
-  }
 
   return (
     <div
+        className={`min-h-screen space-y-3 ${cn(PageBuilderVariant({ gridPlacement, className }))}`}
+  
       data-sanity={createDataAttribute({
         ...sanityConfig,
         id: documentId,
@@ -74,77 +79,3 @@ export function PageBuilder({
   )
 }
 
-function renderSection(section: Section) {
-  switch (section?._type) {
-    case 'EmployeesType':
-      return <EmployeesSection section={section} />
-    case 'CallToAction':
-      return <CallToActionSection section={section} />
-    case 'CallToAction2':
-      return <CallToActionSection2 section={section} />
-    case 'hero':
-      return (
-        <React.Fragment>
-          <Hero data={section} />
-          <Breadcrumbs />
-        </React.Fragment>
-      )
-    case 'Hero2':
-      return (
-        <React.Fragment >
-          <Hero2 data={section} />
-          <Breadcrumbs />
-        </React.Fragment>
-      )
-    case 'Hero3':
-      return (
-        <React.Fragment >
-          <Hero3 data={section} />
-          <Breadcrumbs />
-        </React.Fragment>
-      )
-    case 'LogoGallery':
-      return (
-        <React.Fragment >
-          <LogoGallery data={section} />
-        </React.Fragment>
-      )
-    case 'LogoGallery2':
-      return (
-        <React.Fragment >
-          <LogoGallery2 data={section} />
-        </React.Fragment>
-      )
-
-    case 'textWithIllustration':
-      return <TextWithIllustration data={section} />
-    case 'contactFormType':
-      return <ContactFormSection data={section} />
-    case 'Gallery':
-      return <GallerySection section={section} />
-    case 'ArticlesType':
-      return (
-        <ArticlesSection
-
-          section={section}
-          amount={section.amount}
-        />
-      )
-    case 'EventType':
-      return (
-        <EventSection
-          amount={section.amount}
-          section={section}
-
-        />
-      )
-    case 'textContainer':
-      return (
-        <TextContainer data={section} />
-      )
-    case 'MediaType':
-      return <Media data={section} index={undefined} />
-    default:
-      return null
-  }
-}
