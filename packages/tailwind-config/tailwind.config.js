@@ -308,17 +308,6 @@ const config = {
         require('@tailwindcss/aspect-ratio'),
         require('@tailwindcss/container-queries'),
         require('tailwindcss-debug-screens'),
-        plugin(function ({ addUtilities, addVariant, }) {
-            addVariant('not-first-child', '&:not(:first-child)');
-            addVariant('popover-open', '&:popover-open'),
-                addVariant('starting', '@starting-style'),
-                addVariant('parent-popover-open', '[popover]:popover-open &'),
-                addUtilities({
-                    '.transition-discrete': {
-                        transitionBehavior: 'allow-discrete',
-                    },
-                });
-        }),
     ],
 };
 export default config;
